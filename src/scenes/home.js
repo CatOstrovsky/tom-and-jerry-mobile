@@ -4,7 +4,8 @@ let config = {
 	preload: preload,
 	create: create,
 	update: update
-};
+},
+keys = null;
 
 function preload ()
 {
@@ -72,12 +73,12 @@ function create ()
 	this.add.sprite(340, 430, 'basescene', 'lll.png').setScale(1.4);
 	this.add.sprite(20, 235, 'basescene', 'cold.png').setScale(1.4);
 
-	this.add.sprite(330, 30, 'basescene', 'heart.png').setScale(1.4);
-	this.add.sprite(300, 30, 'basescene', 'heart.png').setScale(1.4);
-	this.add.sprite(270, 30, 'basescene', 'heart.png').setScale(1.4);
+	this.add.sprite(330, 60, 'basescene', 'heart.png').setScale(1.4);
+	this.add.sprite(300, 60, 'basescene', 'heart.png').setScale(1.4);
+	this.add.sprite(270, 60, 'basescene', 'heart.png').setScale(1.4);
 
-	let jerry = this.add.sprite(100, 390, 'basescene', 'jerry/sprite_1.png');
-    jerry.anims.play('jerry_normal');
+	this.jerry = this.add.sprite(100, 390, 'basescene', 'jerry/sprite_1.png');
+    this.jerry.anims.play('jerry_normal');
 
     let tom = this.add.sprite(70, 200, 'basescene', 'tom/sprite_1.png');
     tom.anims.play('tom_normal');
@@ -92,12 +93,16 @@ function create ()
    	addFood.call(this, i);
    }
 
+   let score = this.add.dynamicBitmapText(280, 10, 'game', `147851`, 22).setOrigin(1, 1);
+
    let t = 0;
-	let time = this.add.dynamicBitmapText(50, 10, 'game', `${t}`, 25).setOrigin(0, 1);
+	let time = this.add.dynamicBitmapText(50, 10, 'game', `${t}`, 22).setOrigin(0, 1);
 	setInterval(() => {
 		t++;
 		time.setText(t);
-	}, 500)
+	}, 500);
+
+	keys = this.input.keyboard.addKeys('RIGHT,LEFT');
 }
 
 function addFood(num = 1) {
@@ -107,6 +112,15 @@ function addFood(num = 1) {
 }
 
 function update() {
+	
+	if(keys.RIGHT.isDown) {
+		this.jerry.x += 5;
+		this.jerry.setScale(1,1)
+	} else if(keys.LEFT.isDown) {
+		this.jerry.x -= 5;
+		this.jerry.setScale(-1,1)
+	}
+
 	if(this.foods) {
 		for(let food of this.foods){
 			food.setY(food.y + 2);
