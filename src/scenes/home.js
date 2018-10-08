@@ -1,135 +1,168 @@
+import LifeManager from '../classes/lifeManager.js'
+import ScoreManager from '../classes/scoreManager.js'
+import FoodManager from '../classes/foodManager.js'
+import JerryManager from '../classes/jerryManager.js'
+import CollisionManager from '../classes/collisionManager.js'
+import TomManager from '../classes/tomManager.js'
+
 let config = {
 	key: 'home',
-	active: true,
+	active: false,
 	preload: preload,
 	create: create,
 	update: update
 },
-keys = null;
+tomTimer = 0,
+overed = false,
+graphics = null;
 
 function preload ()
 {
-	this.load.atlas('basescene', 'assets/spritesheet.png', 'assets/spritesheet.json', 'images');
-	this.load.bitmapFont('game', 'assets/fonts/font.png', 'assets/fonts/font.fnt');
+	
 }
 
-function generateAnimations() {
-
-	let frameNames = this.anims.generateFrameNames('basescene', {
-		start: 0, end: 3, prefix: 'jerry/sprite_', suffix: '.png'
-	});
-	this.anims.create({ key: 'jerry_normal', frames: frameNames, frameRate: 9, repeat: Infinity });
+function drawScene() {
 
 
-	frameNames = this.anims.generateFrameNames('basescene', {
-		start: 2, end: 3, prefix: 'mini/sprite_', suffix: '.png'
-	});
-	this.anims.create({ key: 'mini_normal', frames: frameNames, frameRate: 2, repeat: Infinity });
-
-
-	frameNames = this.anims.generateFrameNames('basescene', {
-		start: 2, end: 3, prefix: 'tom/sprite_', suffix: '.png'
-	});
-	this.anims.create({ key: 'tom_normal', frames: frameNames, frameRate: 2, repeat: Infinity });
-
-
-	frameNames = this.anims.generateFrameNames('basescene', {
-		start: 0, end: 3, prefix: 'clock/sprite_', suffix: '.png'
-	});
-	this.anims.create({ key: 'clock_normal', frames: frameNames, frameRate: 9, repeat: Infinity });
-
-
-	frameNames = this.anims.generateFrameNames('basescene', {
-		start: 0, end: 3, prefix: '1/sprite_', suffix: '.png'
-	});
-	this.anims.create({ key: 'food_1_normal', frames: frameNames, frameRate: 9, repeat: Infinity });
-
-
-	frameNames = this.anims.generateFrameNames('basescene', {
-		start: 0, end: 3, prefix: '2/sprite_', suffix: '.png'
-	});
-	this.anims.create({ key: 'food_2_normal', frames: frameNames, frameRate: 9, repeat: Infinity });
-
-
-	frameNames = this.anims.generateFrameNames('basescene', {
-		start: 0, end: 3, prefix: '3/sprite_', suffix: '.png'
-	});
-	this.anims.create({ key: 'food_3_normal', frames: frameNames, frameRate: 9, repeat: Infinity });
-
-}
-
-function create ()
-{
-	this.foods = [];
-
-	var graphics = this.add.graphics();
-	graphics.fillStyle(0xacc6b8, 1).fillRect(0, 0, 350, 400);
+	graphics = this.add.graphics();
+	graphics.fillStyle(0xacc6b8, 1).fillRect(0, -550, 350, 950);
 	graphics.fillStyle(0x96a9ce, 1).fillRect(0, 400, 350, 50);
+	graphics.fillStyle(0x96a9ce, 1).fillRect(0, 450, 350, 550);
 
-	generateAnimations.call(this);
+	graphics.setAlpha(0);
+
+	this.tweens.add({
+		targets: graphics,
+		alpha: 1,
+		duration: 300
+	})
 
 	this.add.sprite(330, 400, 'basescene', 'door.png').setScale(1.4).setOrigin(1, 1);
 	this.add.sprite(220, 400, 'basescene', 'box.png').setScale(1.4).setOrigin(1, 1);
 	this.add.sprite(340, 430, 'basescene', 'lll.png').setScale(1.4);
 	this.add.sprite(20, 235, 'basescene', 'cold.png').setScale(1.4);
 
-	this.add.sprite(330, 60, 'basescene', 'heart.png').setScale(1.4);
-	this.add.sprite(300, 60, 'basescene', 'heart.png').setScale(1.4);
-	this.add.sprite(270, 60, 'basescene', 'heart.png').setScale(1.4);
-
-	this.jerry = this.add.sprite(100, 390, 'basescene', 'jerry/sprite_1.png');
-    this.jerry.anims.play('jerry_normal');
-
-    let tom = this.add.sprite(70, 200, 'basescene', 'tom/sprite_1.png');
-    tom.anims.play('tom_normal');
-
-    let mini = this.add.sprite(0, 190, 'basescene', 'mini/sprite_1.png').setOrigin(0, .5);
-    mini.anims.play('mini_normal');
-
-    let clock = this.add.sprite(30, 30, 'basescene', 'clock/sprite_1.png').setScale(1.2);
-    clock.anims.play('clock_normal');
-
-   for (var i = 3; i >= 1; i--) {
-   	addFood.call(this, i);
-   }
-
-   let score = this.add.dynamicBitmapText(280, 10, 'game', `147851`, 22).setOrigin(1, 1);
-
-   let t = 0;
-	let time = this.add.dynamicBitmapText(50, 10, 'game', `${t}`, 22).setOrigin(0, 1);
-	setInterval(() => {
-		t++;
-		time.setText(t);
-	}, 500);
-
-	keys = this.input.keyboard.addKeys('RIGHT,LEFT');
 }
 
-function addFood(num = 1) {
-	let food = this.add.sprite(parseInt(Math.random() * 250), parseInt(Math.random() *250), 'basescene', `${num}/sprite_1.png`);
-    food.anims.play(`food_${num}_normal`);
-    this.foods.push(food);
+function startGame() {
+	this.FoodManager.addFood();
+	tomTimer = setInterval(() => {
+		if(Math.random() > .5)
+			this.TomManager.addBomb();
+	}, 6000);
+}
+
+function gameOver() {
+	clearTimeout(tomTimer);
+	this.FoodManager.destroy();
+	this.CollisionManager.destroy();
+	this.ScoreManager.destroy();
+	overed = true;
+
+	this.audio.over.play();
+	this.audio.game.pause();
+
+	this.tweens.add({
+		targets: this.cameras.main,
+		scrollY: 550,
+		duration: 1000,
+		onComplete: () => {
+			setTimeout(() => {
+
+				let over = this.add.image(350, 1000, 'gameover').setOrigin(1, 1).setScale(0,0);
+				this.tweens.add({
+					targets: over,
+					scaleX: 1,
+					scaleY:1,
+					duration: 200
+				});
+
+				let gameovertext = this.add.image(175, 550, 'gameovertext').setOrigin(.5, 0);
+
+				let scroretext = this.add.text(175, 730, 'YOU SCORE 0', { fontFamily: 'Arial', fontSize: 22, color: '#ffffff' })
+				.setOrigin(.5,.5)
+				.setStroke('#000000', 4);
+				let currentScore = 0;
+				let needScore = this.ScoreManager.score;
+
+				let intervalScore = setInterval(() => {
+					if(currentScore < needScore) {
+						currentScore++;
+						scroretext.setText(`YOU SCORE ${currentScore}`);
+						this.audio.pop.play();
+					}else{
+						clearInterval(intervalScore);
+
+						setTimeout(() => {
+							this.tweens.add({
+								targets: [over, scroretext, graphics, gameovertext],
+								alpha: 0,
+								duration: 1000,
+								onComplete: () => {
+									this.scene.start('menu');
+								}
+							})
+						}, 2000);
+					}
+				}, 4);
+
+			}, 1000);
+		}
+	});
+
+}
+
+function create ()
+{
+	this.audio = {
+		coin:this.sound.add('coin'),
+		game:this.sound.add('game'),
+		jump:this.sound.add('jump'),
+		over:this.sound.add('over'),
+		pop:this.sound.add('pop'),
+		boom:this.sound.add('boom')
+	};
+
+	this.audio.game.play();
+
+	this.cameras.main.scrollY = -550;
+	this.tweens.add({
+		targets: this.cameras.main,
+		scrollY: 0,
+		duration: 1000,
+		onComplete: () => {
+			this.played = true;
+			startGame.call(this);
+		}
+	});
+	this.gameOver = gameOver;
+
+	drawScene.call(this);
+
+	this.LifeManager = new LifeManager(this);
+	this.ScoreManager = new ScoreManager(this);
+	this.JerryManager = new JerryManager(this);
+	this.FoodManager = new FoodManager(this);
+	this.TomManager = new TomManager(this);
+	
+	this.CollisionManager = new CollisionManager(this);
+
+	this.played = false;
+
 }
 
 function update() {
-	
-	if(keys.RIGHT.isDown) {
-		this.jerry.x += 5;
-		this.jerry.setScale(1,1)
-	} else if(keys.LEFT.isDown) {
-		this.jerry.x -= 5;
-		this.jerry.setScale(-1,1)
+	if(!overed){
+
+		this.JerryManager.update();
+		this.TomManager.update();
+		this.LifeManager.update();
+		this.ScoreManager.update();
+		this.FoodManager.update();
+
+		this.CollisionManager.update();
 	}
 
-	if(this.foods) {
-		for(let food of this.foods){
-			food.setY(food.y + 2);
-			if(food.y > 450){
-				food.setY(-10);
-				// addFood.call(this, 3);
-			}
-		}
-	}
 }
 
 export default config;

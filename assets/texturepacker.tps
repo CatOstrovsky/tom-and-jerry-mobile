@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>4.7.0</string>
         <key>fileName</key>
-        <string>/Users/konstantin/Documents/tom-and-jerry/assets/texturepacker.tps</string>
+        <string>/Users/konstantin/Documents/tom-and-jerry-mobile/assets/texturepacker.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -441,6 +441,31 @@
                 <rect>6,5,12,9</rect>
                 <key>scale9Paddings</key>
                 <rect>6,5,12,9</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">images/bomb/sprite_013.png</key>
+            <key type="filename">images/bomb/sprite_10.png</key>
+            <key type="filename">images/bomb/sprite_11.png</key>
+            <key type="filename">images/bomb/sprite_12.png</key>
+            <key type="filename">images/bomb/sprite_13.png</key>
+            <key type="filename">images/bomb/sprite_14.png</key>
+            <key type="filename">images/bomb/sprite_3.png</key>
+            <key type="filename">images/bomb/sprite_4.png</key>
+            <key type="filename">images/bomb/sprite_5.png</key>
+            <key type="filename">images/bomb/sprite_6.png</key>
+            <key type="filename">images/bomb/sprite_7.png</key>
+            <key type="filename">images/bomb/sprite_8.png</key>
+            <key type="filename">images/bomb/sprite_9.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>28,31,57,61</rect>
+                <key>scale9Paddings</key>
+                <rect>28,31,57,61</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
