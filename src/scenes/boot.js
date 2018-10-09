@@ -22,6 +22,20 @@ function preload ()
 	this.load.audio('over', ['assets/audio/over.mp3']);
 	this.load.audio('pop',  ['assets/audio/pop.mp3']);
 	this.load.audio('boom',  ['assets/audio/boom.mp3']);
+
+	var progress = this.add.graphics();
+	let bootText = this.add.text(175,225, "boot...", {color: "#fae864", fontSize: "30px" }).setOrigin(.5,.5);
+    var onProgress = (value) => {
+        progress.clear();
+        let progressProcent = parseInt(value*100);
+        bootText.setText(`${progressProcent}%`)
+        progress.fillStyle(0x892015, 1);
+        progress.fillRect(0, 0, 350 , 450 * value);
+    }
+
+    this.load.on('progress', (value) => {
+        onProgress(value);
+    });
 }
 
 

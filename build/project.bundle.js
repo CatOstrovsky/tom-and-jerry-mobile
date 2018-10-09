@@ -222,6 +222,8 @@ function gameOver() {
 
 function create ()
 {
+	overed = false;
+	
 	this.audio = {
 		coin:this.sound.add('coin'),
 		game:this.sound.add('game'),
@@ -231,6 +233,7 @@ function create ()
 		boom:this.sound.add('boom')
 	};
 
+	this.audio.game.loop = true;
 	this.audio.game.play();
 
 	this.cameras.main.scrollY = -550;
@@ -496,7 +499,6 @@ class Jerry {
 	}
 
 	update() {
-		
 		if(this.keys.RIGHT.isDown || (this.ctx.input.pointer1.isDown && this.ctx.input.pointer1.x > 175)) {
 			if(this.state < 2 && !this.locked) {
 				this.state++;
