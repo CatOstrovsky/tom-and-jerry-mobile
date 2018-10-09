@@ -44,7 +44,6 @@ class Jerry {
 	}
 
 	update() {
-		
 		if(this.keys.RIGHT.isDown || (this.ctx.input.pointer1.isDown && this.ctx.input.pointer1.x > 175)) {
 			if(this.state < 2 && !this.locked) {
 				this.state++;

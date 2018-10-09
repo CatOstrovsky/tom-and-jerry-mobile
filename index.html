@@ -1,7 +1,11 @@
  <!DOCTYPE html>
  <html>
      <head>
+        <title>Tom And Jerry Mobile</title>
+        <meta data-hid="description" name="description" content="Tom And Jerry Mobile game. Based on Phaser3 javascript framework. By @catOstrovsky">
+        <meta data-hid="description" name="og:image" content="http://api.web-panda.ru/images/share-tj.png">
          <meta charset="utf-8">
+         <meta name="viewport" content="width=350, initial-scale=1">
          <style>
          	body{
          		margin: 0px;
@@ -9,13 +13,95 @@
          		align-items: center;
          		justify-content: center;
          		min-height: 100vh;
+                flex-direction: column;
          		background: #1d1d1d;
+                font-family: Arial;
          	}
+            @keyframes roateInfinite {
+              0% {
+                transform: rotate(0deg); }
+              34% {
+                transform: rotate(10deg); }
+              72% {
+                transform: rotate(-10deg); }
+              100% {
+                transform: rotate(0deg); } 
+            }
+            .copyright {
+                color: #fff;
+                font-size: 12px;
+                display: block;
+                white-space: nowrap;
+            }
+            .copyright img {
+
+                max-width: 12px;
+            }
+            h1 {
+                font-size: 17px;
+                color: #fff;
+                margin-top: 0px;
+                margin-bottom: 5px;
+            }
+            a.more {
+                margin-bottom: 5px;
+                text-decoration: none;
+                color: #fae864;
+                font-weight: bold;
+                font-size: 13px;
+            }
+            .shares-wrapper{
+                margin: 5px 0px;
+            }
+            .donate-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                position: absolute;
+                right: 5px;
+                top: 5px;
+                width: 40px;
+            }
+            .dotate-img {
+                animation: roateInfinite linear 1s;
+                animation-iteration-count: infinite;
+                transform-origin: 50% 50%;
+            }
+            img.dotate-img {
+                max-width: 50px;
+            }
+            div#donate {
+                max-width: 100%;
+            }
          </style>
      </head>
      <body>
+        <h1>Tom And Jerry Mobile</h1>
+        <a class="more" href="https://web-panda.ru/projects" target="_blank">More projects</a>
      	<script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.12.0/phaser.min.js"></script>
      	<div id="root"></div>
-         <script src="build/project.bundle.js" charset="utf-8"></script>
+
+        <div class="shares-wrapper">
+            <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+            <script src="//yastatic.net/share2/share.js"></script>
+            <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,twitter,telegram"></div>
+        </div>
+        <div class="copyright">Copyright 2018. By @catOstrovsky with  <img src="https://demo.web-panda.ru/box-shadow-generator/images/like.svg" alt=""></div>
+
+        <script src="build/project.bundle.js" charset="utf-8"></script>
+
+
+
+        <div style="display: none;"> 
+            <div id="donate">
+                <iframe frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/donate.xml?account=410014761721981&quickpay=donate&payment-type-choice=on&mobile-payment-type-choice=on&default-sum=50&targets=Money+for+beer&target-visibility=on&project-name=ShadowGenerator&project-site=&button-text=01&successURL=" width="522" height="117"></iframe>
+            </div>
+        </div>
+        <a data-fancybox="" data-src="#donate" class="donate-btn"><img src="https://demo.web-panda.ru/box-shadow-generator/images/bag.svg" alt="" class="dotate-img"></a>
+        
+        <script src="//code.jquery.com/jquery-2.2.4.min.js" "=""></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
      </body>
  </html>

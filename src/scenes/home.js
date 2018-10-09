@@ -114,6 +114,8 @@ function gameOver() {
 
 function create ()
 {
+	overed = false;
+	
 	this.audio = {
 		coin:this.sound.add('coin'),
 		game:this.sound.add('game'),
@@ -123,6 +125,7 @@ function create ()
 		boom:this.sound.add('boom')
 	};
 
+	this.audio.game.loop = true;
 	this.audio.game.play();
 
 	this.cameras.main.scrollY = -550;
