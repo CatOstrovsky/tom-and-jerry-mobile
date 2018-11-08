@@ -31,6 +31,8 @@ class CollisionManager {
 
 		this.ctx.cameras.main.shake(250)
 		this.ctx.audio.boom.play();
+
+		this.life.setLife(this.life.count - 1);
 	}
 
 	collider(jerry, food) {
