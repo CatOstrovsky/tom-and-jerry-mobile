@@ -12,12 +12,12 @@ class Score {
 
 	drawScore() {
 		this.clock = this.ctx.add.sprite(20, 20, 'basescene', 'clock/sprite_1.png').setScale(1);
-   		this.scoreObject = this.ctx.add.dynamicBitmapText(10, 40, 'game', `0`, 20).setOrigin(1, 1);
+   	this.scoreObject = this.ctx.add.dynamicBitmapText(10, 40, 'game', `0`, 20).setOrigin(0, 0);
 
-    	this.clock.anims.play('clock_normal');
+    this.clock.anims.play('clock_normal');
 
-		this.objectTime = this.ctx.add.dynamicBitmapText(35, 5, 'game', `${this.time}`, 20).setOrigin(0, 1);
-		
+		this.objectTime = this.ctx.add.dynamicBitmapText(40, 25, 'game', `${this.time}`, 20).setOrigin(0, 1);
+
 		this.timer = setInterval(() => {
 			this.time++;
 			this.objectTime.setText(this.time);
