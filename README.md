@@ -3,6 +3,8 @@
 This is clone "Tom and Jerry mobile". Based on Phaser 3
 [!!!DEMO HERE!!!](https://demo.web-panda.ru/tom-and-jerry/)
 
+![QR](https://demo.web-panda.ru/qr/tomx200.png)
+
 | ![Game Screenshot](https://demo.web-panda.ru/screenshots/tom_1.JPG) | 
 ![Game Screenshot](https://demo.web-panda.ru/screenshots/tom_2.JPG)|
 ![Game Screenshot](https://demo.web-panda.ru/screenshots/tom_3.JPG)|
