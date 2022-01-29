@@ -1,14 +1,15 @@
 # Tom and Jerry mobile game
 
 This is clone "Tom and Jerry mobile". Based on Phaser 3
-[!!!DEMO HERE!!!](https://demo.web-panda.ru/tom-and-jerry/)
+[!!!DEMO HERE!!!](http://catostrovsky.ru/demo/tom-and-jerry/)
 
-![QR](https://demo.web-panda.ru/qr/tomx200.png)
+![tomx200](https://user-images.githubusercontent.com/13501355/151675361-8ea7784d-f72f-4794-909d-d47b65dae2e2.png)
 
-| ![Game Screenshot](https://demo.web-panda.ru/screenshots/tom_1.JPG) | 
-![Game Screenshot](https://demo.web-panda.ru/screenshots/tom_2.JPG)|
-![Game Screenshot](https://demo.web-panda.ru/screenshots/tom_3.JPG)|
-|-|-|-|
+![tom_1](https://user-images.githubusercontent.com/13501355/151675378-a8752571-ecc8-475a-b3b0-3eb211556ad8.JPG)
+![tom_2](https://user-images.githubusercontent.com/13501355/151675382-a120ccfb-cfef-49f0-aafa-0b47314f8e69.JPG)
+![tom_3](https://user-images.githubusercontent.com/13501355/151675383-a240028a-7001-444b-a0af-85ff550f9a79.JPG)
+
+
 
 ### Requirements
 
